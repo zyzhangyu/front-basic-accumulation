@@ -1,0 +1,155 @@
+CSS:
+1）从属关系的区别：link属于XHTML标签，而@import是CSS提供的语法规则，link除了加载CSS，还可以定义RSS，定义rel连接属性等，@import就只能加载CSS。
+2）加载顺序的区别：页面加载时，link会同时被加载，而@import引用的CSS会等页面被加载完后再加载。
+3）兼容性的区别：@import只有IE5以上才能被识别，而link是XHTML标签，无兼容问题。
+4）DOM可控性区别：通过js操作DOM,可以插入link标签来改变样式；由于DOM方法是基于文档的，无法使用@import方式插入样式
+5）权重区别(争议)：可参考：https://www.cnblogs.com/my--sunshine/p/6872224.html
+
+
+HTML圣杯布局:
+<!DOCTYPE html>
+<head>
+    <style>
+        .main {
+            padding-left: 150px;
+            padding-right: 250px;
+            background-color: cadetblue;
+            height: 300px;
+            word-wrap:break-word;
+        }
+        .middle {
+            width: 100%;
+            height: 100px;
+            float: left;
+        }
+        .left {
+            width: 150px;
+            right: 150px;
+            background-color: aquamarine;
+            margin-left: -100%;
+            position: relative;
+            float: left;
+        }
+        .right {
+            float: left;        
+            width: 250px;
+            background-color: sienna;
+            margin-right: -250px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="middle">
+            <warp>
+                1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm
+            </warp>
+        </div>
+        <div class="left">aaaaaaaaaa </div>
+        <div class="right">right</div>
+    </div>
+</body>
+
+
+
+HTML双飞翼:
+<!DOCTYPE html>
+<head>
+    <style>
+        .left {
+            background-color: aquamarine;
+            width: 150px;
+            height: 100px;
+            float: left;
+            margin-left: -100%;
+        }
+
+        .center {
+            background-color: blueviolet;
+            width: 100%;
+            float: left;
+        }
+
+        .right {
+            background-color: coral;
+            width: 250px;
+            float: left;
+            margin-left: -250px;
+        }
+
+        .middle {
+            margin-left: 150px;
+            margin-right: 250px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="center">
+            <div class="middle">
+                <warp>
+                    1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm
+                </warp>
+            </div>
+        </div>
+        <div class="left">aaaaaaaaaa </div>
+        <div class="right">right</div>
+    </div>
+</body>
+
+
+FLex布局:
+<body class="HolyGrail">
+    <header>
+        <style>
+            .HolyGrail {
+                display: flex;
+                min-height: 100vh;
+                flex-direction: column;
+            }
+
+            .HolyGrail-body {
+                display: flex;
+                flex: 1;
+            }
+            .HolyGrail-content {
+                flex: 1;
+                background-color: cyan;
+            }
+            .HolyGrail-nav, .HolyGrail-ads {
+                /* 12em is the width of the columns */
+                flex: 0 0 12em;
+                background-color: cornflowerblue;
+            }
+
+.HolyGrail-nav {
+  /* put the nav on the left */
+  order: -1;
+}
+        </style>
+    </header>
+    <div class="HolyGrail-body">
+      <main class="HolyGrail-content">…</main>
+      <nav class="HolyGrail-nav">…</nav>
+      <aside class="HolyGrail-ads">…</aside>
+    </div>
+    <footer>I am footer!</footer>
+  </body>
+
+
+要点:
+    父视图设置padding-left和padding-right给左和右空间，这是为了左右不遮挡middle的内容。
+    全部使用float:left;然后配合margin-left margin-right这样不会被挤到下一行。
+    left使用relative布局，这样设置left会把left再往左设置，可以达到padding-left的最左边。
+
+
+
+
+JS题答案:
+function buildArray(array, length, min, max) {
+    var num = Math.floor(Math.random() * (max - min + 1) + min );
+    if (!array.includes(num)) {array.push(num);}
+    return array.length === length ? array : buildArray(array, length, min, max);
+}
+
