@@ -5,16 +5,19 @@
     <!-- 表单 -->
     <form>
       <div class="mb-3">
-        <label class="from-label">邮箱地址</label>
-        <validate-input :rules="emailRules"></validate-input>
+        <label class="form-label">邮箱地址</label>
+        <validate-input type="text" :rules="emailRules" v-model="emailVal" placeholder="hello threr"></validate-input>
+        {{emailVal}}
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1">密码</label>
-        <input
+        <label class="form-label">密码</label>
+        <validate-input
           type="password"
-          class="form-control"
-          id="exampleInputPassword1"
+          placeholder="请输入密码"
+          :rules="passwordRules"
+          v-model="passwordVal"
         />
+        {{passwordVal}}
       </div>
     </form>
     <!-- <column-list :list="list"> </column-list> -->
@@ -22,11 +25,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ColumnList, { ColumnProps } from './components/ColumnList.vue';
 import GlobalHeader, { UserProps } from './components/GlobalHeader.vue';
-import { RulesProp } from './components/ValidateInput.vue';
+import ValidateInput,{ RulesProp } from './components/ValidateInput.vue';
 
 const testUser: UserProps = {
   isLogin: true,
@@ -62,18 +65,18 @@ const testData: ColumnProps[] = [
   }
 ];
 const emailReg = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-const emailRules: RulesProp = [
-  {type: 'required', message: '电子邮箱地址不能为空'},
-  {type: 'email', message: '请输入正确的电子邮箱格式'}
-];
+
 
 export default defineComponent({
   name: 'App',
   components: {
     // ColumnList,
-    GlobalHeader
+    GlobalHeader,
+    ValidateInput
   },
   setup() {
+    const emailVal = ref('viking');
+    const passwordVal = ref('password');
     const emailRef = reactive({
       val: '',
       message: '',
@@ -91,12 +94,19 @@ export default defineComponent({
         emailRef.message = '';
       }
     };
+    const emailRules: RulesProp = [
+      {type: 'required', message: '电子邮箱地址不能为空'},
+      {type: 'email', message: '请输入正确的电子邮箱格式'}
+    ];
 
     return {
       list: testData,
       currentUser: testUser,
       emailRef,
-      validateEmail
+      validateEmail,
+      emailRules,
+      emailVal,
+      passwordVal
     };
   }
 });
@@ -112,3 +122,5 @@ export default defineComponent({
   margin-top: 60px;
 }
 </style>
+
+
