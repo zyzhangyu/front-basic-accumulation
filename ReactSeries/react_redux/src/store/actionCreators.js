@@ -5,6 +5,7 @@ import {
   DECREMENT,
   CHANGE_BANNERS,
   CHANGE_RECOMMEND,
+  FETCH_HOME_MULTIDATA
 } from "./constants.js";
 import axios from "axios";
 
@@ -47,3 +48,9 @@ export const getHomeMultidataAction = (dispatch) => {
     dispatch(changeRecommendsActon(data.recommend.list));
   });
 };
+
+
+/// redux-saga拦截的action
+export const fetchHomeMultidataAction = {
+  type: FETCH_HOME_MULTIDATA
+}
