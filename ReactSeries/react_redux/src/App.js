@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
 
-import Home from "./pages/about5";
-import About from "./pages/home5-中间件saga的使用";
+import Home from "./pages/about6";
+import About from "./pages/home6";
 function App() {
   return (
     // 2
@@ -14,10 +14,11 @@ function App() {
     // </div>
 
 <div className="App">
-  <Home></Home>
+  
   <About></About>
+  <Home></Home>
 </div>
   );
 }
 
-export default App;
+export default App; 
