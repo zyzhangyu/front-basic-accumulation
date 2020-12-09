@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import {
     decAction,
-    decActipn,
     subAction,
 } from '../store/counter/actionCreators';
 
