@@ -1,16 +1,18 @@
 
 import React from 'react';
+import { renderRoutes } from 'react-router-config';
 import { Link, NavLink, Route, Switch } from 'react-router-dom';
+import routes from '../route';
 
 
-function History() {
+export function History() {
   return (
     <div>
         悠久的历史文化
     </div>
   );
 }
-function Culture() {
+export function Culture() {
   return (
     <div>
         创新发展共赢
@@ -18,7 +20,7 @@ function Culture() {
   );
 }
 
-function Contact() {
+export function Contact() {
   return (
     <div>
         联系电话 110
@@ -26,7 +28,7 @@ function Contact() {
   );
 }
 
-function Join() {
+export function Join() {
   return (
     <div>
         欢迎您加入我们
@@ -51,14 +53,17 @@ export default function About(props) {
             jumpToJoin();
           }}>加入我们</button>
           {/* <Switch> */}
-            <Route exact path="/about/culture" component={Culture}></Route>
+            {/* <Route exact path="/about/culture" component={Culture}></Route>
             <Route  path="/about/contact" component={Contact}></Route>
             <Route  path="/about/history" component={History}></Route>
-            <Route  path="/about/join" component={Join}></Route>
+            <Route  path="/about/join" component={Join}></Route> */}
 
 
 
           {/* </Switch> */}
+
+
+            {renderRoutes(props.route.routes)}
           ###########################
           <h2>About</h2>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~``
